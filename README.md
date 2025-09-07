@@ -5,7 +5,7 @@
 ## Key Findings
 
 ### 1. Correlation Matrix of Health Indicators
-The correlation matrix visualizes relationships between health variables and diabetes.  
+The correlation matrix visualises relationships between health variables and diabetes.  
 - Strong positive correlations highlight **major risk factors**.  
 - Negative correlations highlight **protective factors**.  
 
@@ -24,7 +24,7 @@ These factors indicate areas where individuals might focus efforts to reduce ris
 ---
 
 ### 3. Individual Risk Scores
-Each person receives a **Risk Score**, summarizing overall diabetes risk.
+Each person receives a **Risk Score**, summarising overall diabetes risk.
 
 - **Distribution of Risk Scores:** Most individuals fall in the middle, while a smaller group shows higher risk.  
 ![Risk Score Distribution](images/risk_score_distribution.png)

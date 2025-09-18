@@ -125,9 +125,35 @@ We standardised risk/protective features, computed `RiskScore = Σ(risk z-scores
 
 ---
 
-## 📌 Portfolio Highlights
+##  Portfolio Highlights
 - **Full-cycle workflow**: EDA → Feature Engineering → Risk Scoring → Modelling → Recommendations  
 - **Reproducible outputs**: All visuals in `images/`, all tables in `tables/`  
 - **Readable narrative**: Markdown storytelling without code  
 - **Policy-ready insights**: Directly applicable to public-health strategy
+
+## Recommended Next Steps
+
+This analysis has surfaced several promising insights, but also raised important questions that warrant deeper investigation:
+
+- **Clarify Temporal Relationships**  
+  Explore whether certain health issues (e.g. difficulty walking, vision problems) tend to precede diabetes onset or emerge as complications. Longitudinal data or proxy indicators (e.g. age of symptom onset) could help untangle cause vs. consequence.
+
+- **Stratify Risk by Demographics**  
+  Examine how risk factors vary across age groups, gender, and ethnicity. Are younger individuals with high BMI showing early signs? Are certain symptoms more predictive in older adults?
+
+- **Investigate Protective Factors**  
+  Highlight individuals with elevated risk scores who remain non-diabetic. What patterns or behaviors might be buffering them? This could inform prevention strategies.
+
+- **Functional Impact Analysis**  
+  Assess how diabetes correlates with mobility, pain, and daily functioning. For example, does difficulty walking correlate more strongly with diagnosed diabetes, or is it already present in high-risk non-diabetics?
+
+- **Model Interpretability & Communication**  
+  Improve how composite scores and risk flags are explained. Consider adding plain-language summaries or visual keys to help clinicians and non-technical users interpret results.
+
+- **Expand to Predictive Timelines**  
+  If data permits, build models that estimate time-to-onset for diabetes based on current indicators. This could support more proactive care planning.
+
+- **Feedback Loop for Clinical Use**  
+  Engage with healthcare professionals to validate findings and refine outputs for real-world utility. Their input could guide which features to prioritize and how to present risk.
+
 

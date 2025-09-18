@@ -13,7 +13,7 @@ I computed Pearson correlations between all numeric features and diabetes status
 
 **Key Insights:**
 - **Strongest risk factors**: `DiffWalk` (~0.34), `PhysHlth` (~0.30), `GenHlth` (~0.28), `HighBP` (~0.27), `HeartDiseaseorAttack` (~0.25), `Stroke` (~0.20)
-- **Strongest protective factors**: `Income` (~–0.14), `Education` (~–0.13)
+- **Strongest protective factors**: `Income` (~0.14), `Education` (~0.13)
 - **Lifestyle factors**: modest protection from `Veggies`, `PhysActivity`, `Fruits`
 - **Healthcare access**: `AnyHealthcare` and `CholCheck` show positive correlation — likely reverse causality
 - **Heavy alcohol**: flagged as a *protective* factor — explored next

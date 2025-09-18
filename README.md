@@ -1,145 +1,138 @@
 # 🩺 Diabetes Risk and Protective Factor Analysis
 
-## 📌 Project Overview  
-This project analyses data from the **2015 Behavioural Risk Factor Surveillance System (BRFSS)** to identify the factors most strongly associated with diabetes.  
-Beyond building a predictive model, it uncovers **actionable insights** to guide public-health strategies.
-
-Key contributions include:  
-- Identifying **risk and protective factors** for diabetes  
-- Creating a **composite RiskScore** to quantify individual-level risk  
-- Stratifying risk across **income, age and sex groups**  
-- Highlighting **socioeconomic disparities** in diabetes prevalence  
-- Providing **policy-ready recommendations**  
+## 📌 Project Overview
+This project analyses the **2015 Behavioural Risk Factor Surveillance System (BRFSS)** dataset to identify the factors most strongly associated with diabetes.  
+The workflow moves from exploratory analysis to feature engineering, risk scoring, stratified profiling, and model evaluation — with all outputs saved to `images/` and `tables/` for reproducibility and portfolio presentation.
 
 ---
 
-## 🔎 Key Insights
+## 1. Correlation Matrix & Key Insights
+We computed Pearson correlations between all numeric features and diabetes status.
 
-### 1. Strongest Risk Factors  
-- Difficulty walking (`DiffWalk`)  
-- Days of poor physical health (`PhysHlth`)  
-- Self-rated general health (`GenHlth`)  
-- High blood pressure (`HighBP`)  
-- Heart disease or attack (`HeartDiseaseorAttack`)  
-- Stroke history (`Stroke`)  
+![Correlation Matrix](images/correlation_matrix.png)
 
-![Correlation Matrix of Health Indicators](images/correlation_matrix.png)  
-**Download CSV**: [Correlation Matrix (CSV)](tables/correlation_matrix.csv)  
+**Key Insights:**
+- **Strongest risk factors**: `DiffWalk` (~0.34), `PhysHlth` (~0.30), `GenHlth` (~0.28), `HighBP` (~0.27), `HeartDiseaseorAttack` (~0.25), `Stroke` (~0.20)
+- **Strongest protective factors**: `Income` (~–0.14), `Education` (~–0.13)
+- **Lifestyle factors**: modest protection from `Veggies`, `PhysActivity`, `Fruits`
+- **Healthcare access**: `AnyHealthcare` and `CholCheck` show positive correlation — likely reverse causality
+- **Heavy alcohol**: flagged as a *protective* factor — explored next
 
----
-
-### 2. Protective Factors  
-- **Income** and **Education**: strongest protection  
-- **Lifestyle behaviours** (fruits, vegetables, physical activity) provide modest benefits  
-
-![Protective Factors Distribution](images/protective_factors_distribution.png)  
-**Download CSV**: [Protective Factors](tables/protective_factors.csv)  
+📄 [Risk Factors Table](tables/risk_factors.csv)  
+📄 [Protective Factors Table](tables/protective_factors.csv)
 
 ---
 
-### 3. Heavy Alcohol Consumption  
-- **Non-diabetics**: ~6–7% heavy drinkers  
-- **Pre-diabetes**: ~4–5%  
-- **Diabetes**: ~2–4%  
-- Sharpest declines in younger & higher-income groups  
-- Men consistently drink more  
-
+## 2. Heavy Alcohol Consumption Analysis
+### By Diabetes Status
 ![Heavy Alcohol by Status](images/heavy_alcohol_by_status.png)  
-**Download CSV**: [Heavy Alcohol by Status](tables/heavy_alcohol_by_status.csv)
+📄 [Table](tables/heavy_alcohol_by_status.csv)
 
-![Heavy Alcohol by Income Group](images/heavy_alcohol_by_income_group.png)  
-**Download CSV**: [Income vs Heavy Drinker](tables/income_vs_heavy_drinker.csv)
+**Insight:** Heavy drinking is most common in non-diabetics (~6–7%), drops in pre-diabetes (~4–5%), and lowest in diabetes (~2–4%). Likely reflects behaviour change post-diagnosis or under-reporting.
 
-![Heavy Alcohol by Age Group](images/AgeGroup_heatmap.png)  
-**Download CSV**: [Stratified by Age Group](tables/stratified_agegroup_vs_diabetes.csv)
+### By Income Group
+![Heavy Alcohol by Income & Diabetes](images/IncomeGroup_heatmap.png)  
+📄 [Table](tables/income_vs_heavy_drinker.csv)
 
-![Heavy Alcohol by Sex](images/heavy_alcohol_by_sex.png)  
-**Download CSV**: [Stratified by Sex](tables/stratified_sex_vs_diabetes.csv)
+**Insight:** Higher-income groups drink more when healthy but show the sharpest drop after diagnosis.
+
+### By Age Group
+![Heavy Alcohol by Age & Diabetes](images/AgeGroup_heatmap.png)  
+📄 [Table](tables/stratified_agegroup_vs_diabetes.csv)
+
+**Insight:** Youngest adults have the highest heavy-drinking rates when healthy, but all age groups decline with worsening diabetes status.
+
+### By Sex
+![Heavy Alcohol by Sex & Diabetes](images/Sex_heatmap.png)  
+📄 [Table](tables/stratified_sex_vs_diabetes.csv)
+
+**Insight:** Men consistently report higher heavy drinking than women at every diabetes stage.
 
 ---
 
-### 4. Composite Risk Scoring  
-**RiskScore** = sum(z-scores of risk factors) – sum(z-scores of protective factors)  
-Risk levels:  
-- **Low**: bottom 50%  
-- **Medium**: 50th–90th percentile  
-- **High**: top 10%  
+## 3. Composite RiskScore & 10% Overlay
+We standardised risk/protective features, computed `RiskScore = Σ(risk z-scores) – Σ(protective z-scores)`, and classified into Low, Medium, High.
 
-![High-Risk Distribution](images/high_risk_distribution.png)  
-**Download CSV**: [RiskLevel Summary](tables/risklevel_summary.csv)
+![Risk Score Distribution with Top 10% Overlay](images/high_risk_distribution.png)  
+📄 [Risk Level Summary](tables/risklevel_summary.csv)
+
+**Insight:** The top 10% of scores represent the highest-risk individuals — focus for targeted intervention.
 
 ---
 
-### 5. RiskScore by Diabetes Status  
-- **No Diabetes**: lowest average score  
-- **Pre-Diabetes**: intermediate  
-- **Diabetes**: highest  
-
+## 4. Average RiskScore by Diabetes Status
 ![Average Risk Score by Status](images/avg_risk_by_status.png)  
-**Download CSV**: [Average Risk by Status](tables/avg_risk_by_status.csv)
+📄 [Table](tables/avg_risk_by_status.csv)
+
+**Insight:** Pre-diabetes scores are closer to diabetes than to no-diabetes — signalling early intervention potential.
 
 ---
 
-### 6. High-Risk Individuals  
-Top 10% by RiskScore drive most of the diabetes burden. Key drivers include poor general health, poor physical health and difficulty walking.
-
+## 5. Top 10 High-Risk Individuals
 ![Top 10 High-Risk Individuals](images/top_10_highrisk_by_risk_score.png)  
-**Download CSV**: [Top Risk Features](tables/top_risk_features.csv)
+📄 [Top Risk Features](tables/top_risk_features.csv)
+
+**Insight:** Most top scorers are diabetics, but one non-diabetic appears — poor health and mobility can elevate risk even without diagnosis.
 
 ---
 
-### 7. Outlier Profiles  
-Flagged the highest outliers within non-diabetic and pre-diabetic groups for targeted outreach.
+## 6. Complication Risk Table (Top 10% by Status)
+📄 [High-Risk Non-Diabetics](tables/highrisk_nondiabetic.csv)  
+📄 [High-Risk Pre-Diabetics](tables/highrisk_prediabetic.csv)  
+📄 [High-Risk Diabetics](tables/highrisk_diabetic.csv)
 
-![Non-Diabetic Outliers (Status 0)](images/outliers_status_0.png)  
-![Pre-Diabetic Outliers (Status 1)](images/outliers_status_1.png)
-
----
-
-### 8. Stratified Risk Profiles  
-- **Non-Diabetics** → preventive screening  
-- **Pre-Diabetics** → prevention programmes  
-- **Diabetics** → integrated care  
-
-*(Full tables in `tables/stratified_*_vs_diabetes.csv`)*
+**Insight:**  
+- **Non-Diabetics:** Preventive screening & lifestyle support  
+- **Pre-Diabetics:** Prevention programmes  
+- **Diabetics:** Integrated complication management
 
 ---
 
-### 9. Income and Inequality  
-- Higher income → lower RiskScores & diabetes prevalence  
-- Lower income → greater concentration of high-risk individuals  
-
+## 7. Income & Inequality
 ![Average Risk Score by Income Group](images/income_risk.png)  
 ![Diabetes Status by Income Group](images/income_diabetes_status.png)
 
+**Insight:** Higher income → lower risk and prevalence; lower income → higher prevalence and concentration of high-risk individuals.
+
 ---
 
-### 10. Model Performance  
-Baseline logistic regression:  
-- **Accuracy**: 84%  
-- **ROC AUC**: 0.76  
-- **High precision, low recall**  
+## 8. Risk & Protective Factor Boxplots + Outliers
+![Risk Factors Distribution](images/risk_factors_distribution.png)  
+![Protective Factors Distribution](images/protective_factors_distribution.png)
 
+**Outlier Tables:**  
+![Non-Diabetic Outliers](images/outliers_status_0.png)  
+![Pre-Diabetic Outliers](images/outliers_status_1.png)
+
+**Insight:** Outliers often have poor physical/general health and cardiovascular history, belong to low-income groups, and report no heavy alcohol use.
+
+---
+
+## 9. Model Performance
 ![ROC Curve](images/roc_curve.png)  
-**Download CSV**: [Classification Report](tables/classification_report.csv)  
-**Download CSV**: [Logistic Regression Coeffs](tables/logit_diabetes_binary.csv)
+📄 [Classification Report](tables/classification_report.csv)  
+📄 [Logistic Regression Coefficients](tables/logit_diabetes_binary.csv)
+
+**Insight:** Accuracy 84%, ROC AUC 0.76, high precision but low recall — good at confirming positives, under-detects some cases.
 
 ---
 
-## 🏥 Public-Health Recommendations  
-Use this framework to:  
-1. Identify **top-decile RiskScore individuals**  
-2. Proactively offer **tailored screening and support**  
-3. Address both clinical markers and **structural barriers**  
+## 🏥 Public-Health Recommendations
+1. Identify top-decile RiskScore individuals  
+2. Proactively offer tailored screening and support  
+3. Address both clinical and structural barriers
 
 ---
 
-## 🛠️ Tools Used  
-- **Python**: Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, Statsmodels  
-- **Jupyter Notebook** for reproducible analysis  
-- **Modular code** with clear markdown and organised outputs  
+## 📌 Portfolio Highlights
+- **Full-cycle workflow**: EDA → Feature Engineering → Risk Scoring → Modelling → Recommendations  
+- **Reproducible outputs**: All visuals in `images/`, all tables in `tables/`  
+- **Readable narrative**: Markdown storytelling without code  
+- **Policy-ready insights**: Directly applicable to public-health strategy
+```
 
 ---
 
-## 📌 Why This Project Matters  
-Demonstrates a **full-cycle data-science workflow**—from data exploration through modelling to policy-ready recommendations—bridging **data and impact** in public health.  
+Leon — if you drop this into `README.md` and make sure **all the referenced images and tables are committed and pushed**, GitHub will render the visuals inline and the CSV links clickable.
+
+If you want, I can also **auto-generate this README from your notebook** so it always stays in sync when you re-run the pipeline. That way, you never have to manually update it again. Would you like me to set that up?

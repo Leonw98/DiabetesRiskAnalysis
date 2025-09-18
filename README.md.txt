@@ -1,86 +1,137 @@
+# 🩺 Diabetes Risk and Protective Factor Analysis
+
+## 📌 Project Overview
+This project analyzes data from the **2015 Behavioral Risk Factor Surveillance System (BRFSS)** to identify the factors most strongly associated with diabetes.  
+The goal was not only to build a predictive model, but also to uncover **actionable insights** that can guide public health strategies.
+
+Key contributions of this project include:
+- Identifying **risk and protective factors** for diabetes  
+- Creating a **composite RiskScore** to quantify individual-level risk  
+- Stratifying risk across **income, age, and sex groups**  
+- Highlighting **socioeconomic disparities** in diabetes prevalence  
+- Providing **policy-ready recommendations** for intervention  
 
 ---
 
-## Key Findings
+## 🔎 Key Insights
 
-### 1. Correlation Matrix of Health Indicators
-The correlation matrix visualizes how each health variable relates to diabetes. Strongly positive correlations highlight major risk factors, while negative correlations indicate protective factors.  
-![Correlation Matrix](images/correlation_matrix.png)
+### 1. Strongest Risk Factors
+- Difficulty walking (`DiffWalk`)  
+- Poor physical health days (`PhysHlth`)  
+- Self-rated general health (`GenHlth`)  
+- High blood pressure (`HighBP`)  
+- Heart disease or attack (`HeartDiseaseorAttack`)  
+- Stroke history (`Stroke`)  
 
-### 2. Risk and Protective Factors
-- **Major Risk Factors:** BMI, High Blood Pressure, Heart Disease, Age, Smoking, and Cholesterol issues.  
-- **Protective Factors:** Physical activity, fruit and vegetable intake, education, and income.  
-
-These factors are identified based on their statistical correlation with diabetes in the dataset.
-
-### 3. Individual Risk Scores
-Each person is assigned a **Risk Score**, summarizing their overall diabetes risk based on the identified factors.  
-
-- **Distribution of Risk Scores:** Shows the spread of risk across all individuals; most fall in the middle, while some are much higher.  
-![Risk Score Distribution](images/risk_score_distribution.png)
-
-- **Average Risk Score by Diabetes Status:** Visual comparison of risk scores between non-diabetic, pre-diabetic, and diabetic groups.  
-![Average Risk by Diabetes Status](images/average_risk_by_diabetes.png)
-
-### 4. Top At-Risk Individuals
-The top 10 high-risk non-diabetic or pre-diabetic individuals are highlighted. This helps identify who might benefit most from interventions.  
-![Top 10 High-Risk Individuals](images/top10_risk.png)  
-*Commentary:* Individuals with high BMI, smoking, or high blood pressure tend to dominate this group.
-
-### 5. Risk vs Protective Factors
-Visual comparison of **risk and protective factors** shows which has the greatest effect on overall risk.  
-
-- **Risk Factors Distribution:** Red bars show that BMI and age are the largest contributors to risk.  
-![Risk Factors](images/risk_factors_distribution.png)
-
-- **Protective Factors Distribution:** Green bars show that physical activity and healthy diet can mitigate some risk, though their effect is smaller than the top risk factors.  
-![Protective Factors](images/protective_factors_distribution.png)
-
-### 6. Income Analysis
-Income is a fixed factor but helps contextualize risk.  
-
-- **Average Risk Score by Income Group:** Shows that lower income groups have slightly higher risk scores on average.  
-![Income Risk](images/income_risk.png)
-
-- **Diabetes Status Distribution by Income Group:** Stacked bar chart shows prevalence of diabetes and pre-diabetes across income groups.  
-![Income Diabetes Status](images/income_diabetes_status.png)  
-*Commentary:* While income is associated with risk, lifestyle changes remain the most actionable way to reduce diabetes risk.
+📊 See [Correlation Heatmap](images/correlation_matrix.png)
 
 ---
 
-## Recommendations
+### 2. Protective Factors
+- **Income** and **Education**: stronger protection than any single lifestyle habit  
+- **Lifestyle behaviors** (fruits, vegetables, physical activity) provided modest but consistent benefits  
 
-- **Target modifiable risk factors**: Reducing BMI, quitting smoking, managing blood pressure, and controlling cholesterol can significantly lower risk.  
-- **Enhance protective factors**: Regular physical activity and increasing fruit/vegetable intake can offset some risk.  
-- **Income-related risk** cannot be easily changed, but lifestyle improvements can meaningfully reduce diabetes risk.
-
----
-
-## Methodology
-
-- **Data Cleaning & Exploration:** Loaded the BRFSS 2015 dataset, checked for missing values, and explored correlations.  
-- **Risk Score Calculation:** Combined standardized risk factors and protective factors into a single score.  
-- **Visualization:** Used plots to highlight distributions, top contributors, and income effects.  
-- **High-Risk Identification:** Filtered the top 10% of individuals by Risk Score and examined modifiable factors.
+📋 See [Protective Factors Table](tables/protective_factors.html)
 
 ---
 
-## Tools Used
+### 3. Heavy Alcohol Consumption
+- Highest in **non-diabetics (6–7%)**, dropping to **~4–5% in pre-diabetes** and **~2–4% in diabetes**  
+- Declines are sharpest in younger and higher-income groups  
+- Men consistently reported higher consumption  
 
-- Python 3.13  
-- Pandas, NumPy  
-- Matplotlib, Seaborn  
-- Scikit-learn (StandardScaler)  
-- Jupyter Notebook for interactive analysis  
-
----
-
-## References
-
-1. **BRFSS 2015 Dataset** – Behavioral Risk Factor Surveillance System, Centers for Disease Control and Prevention (CDC).  
-2. Python Libraries: [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/), [Matplotlib](https://matplotlib.org/), [Seaborn](https://seaborn.pydata.org/), [Scikit-learn](https://scikit-learn.org/)  
-3. Portfolio Inspiration: [Tianna Parris – Movie Success Analysis](https://github.com/tiannaparris/PortfolioProjects/blob/main/Analyzing%20the%20Factors%20Contributing%20to%20the%20Success%20of%20a%20Movie.ipynb)
+📊 See charts:  
+- [Alcohol by Status](images/heavy_alcohol_by_status.png)  
+- [Alcohol by Income](images/heavy_alcohol_by_income.png)  
+- [Alcohol by Age](images/heavy_alcohol_by_age.png)  
+- [Alcohol by Sex](images/heavy_alcohol_by_sex.png)  
 
 ---
 
-This project demonstrates how **data-driven insights can inform lifestyle choices** to reduce diabetes risk and highlights the most influential factors for intervention.
+### 4. Composite Risk Scoring
+I created a **RiskScore** by standardizing and summing key features:  
+- Risk factors (e.g., `HighBP`, `GenHlth`, `PhysHlth`)  
+- Minus protective factors (e.g., `Income`, `Education`, `PhysActivity`)  
+
+Risk Levels:  
+- **Low**: bottom 50%  
+- **Medium**: 50th–90th percentile  
+- **High**: top 10%  
+
+📊 See [Risk Score Distribution](images/high_risk_distribution.png)
+
+---
+
+### 5. RiskScore by Diabetes Status
+- **No Diabetes**: lowest scores  
+- **Pre-Diabetes**: closer to Diabetes than to No Diabetes  
+- **Diabetes**: highest risk  
+
+📊 See [Average Risk Score by Group](images/avg_risk_by_status.png)
+
+---
+
+### 6. High-Risk Individuals
+The top 10% of individuals by RiskScore accounted for the majority of diabetes prevalence.  
+Most common risk drivers: poor general health, poor physical health, difficulty walking.  
+
+📊 See [High Risk Distribution](images/high_risk_distribution.png)  
+📋 See [Top 10 High-Risk Individuals Table](tables/top10_highrisk.html)
+
+---
+
+### 7. Stratified Risk Profiles
+- **High-Risk Non-Diabetics** → preventive screening  
+- **High-Risk Pre-Diabetics** → prevention programs  
+- **High-Risk Diabetics** → integrated care  
+
+📋 See [Stratified Profiles Table](tables/stratified_risk_profiles.html)
+
+---
+
+### 8. Income and Inequality
+- Higher income → lower risk scores and lower diabetes prevalence  
+- Lower income → higher prevalence and concentration of high-risk individuals  
+
+📊 See charts:  
+- [Risk by Income](images/income_risk.png)  
+- [Diabetes by Income](images/income_diabetes_status.png)
+
+---
+
+### 9. Model Performance
+Baseline Logistic Regression:  
+- **Accuracy**: 84%  
+- **ROC AUC**: 0.76  
+- **High precision, low recall** — good at confirming positives, but under-detects diabetes  
+
+📊 See [ROC Curve](images/roc_curve.png)
+
+---
+
+## 🏥 Public Health Recommendation
+Healthcare systems can use this framework to:
+1. Identify **top-decile RiskScore individuals**  
+2. Proactively reach out with **tailored screening and coaching**  
+3. Address not just clinical markers, but also **structural barriers** like income and education  
+
+This **data-driven triage system** can reduce new diabetes cases and improve long-term health equity.  
+
+---
+
+## 🛠️ Tools Used
+- **Python** (Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, Statsmodels)  
+- **Jupyter Notebook** for reproducible analysis  
+- **Portfolio-focused structure** with modular code and clear markdowns  
+
+---
+
+## 📌 Why This Project Matters
+This analysis reflects a **full-cycle data science workflow**:
+- Data exploration  
+- Feature engineering  
+- Risk scoring  
+- Model evaluation  
+- Public health recommendations  
+
+It demonstrates my ability to move beyond code into **insightful, decision-ready analysis** — the kind of work that bridges **data and impact**.

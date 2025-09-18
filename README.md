@@ -69,7 +69,7 @@ We standardised risk/protective features, computed `RiskScore = Σ(risk z-scores
 ---
 
 ## 5. Top 10 High-Risk Individuals
-![Top 10 High-Risk Individuals](images/top_10_highrisk_by_risk_score.png)  
+![Top 10 High-Risk Individuals](images/top_10_highrisk_by_risk_scre.png)
 📄 [Top Risk Features](tables/top_risk_features.csv)
 
 **Insight:** Most top scorers are diabetics, but one non-diabetic appears — poor health and mobility can elevate risk even without diagnosis.

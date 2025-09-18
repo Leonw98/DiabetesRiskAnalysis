@@ -131,8 +131,5 @@ We standardised risk/protective features, computed `RiskScore = Σ(risk z-scores
 - **Policy-ready insights**: Directly applicable to public-health strategy
 ```
 
----
-
-Leon — if you drop this into `README.md` and make sure **all the referenced images and tables are committed and pushed**, GitHub will render the visuals inline and the CSV links clickable.
 
 If you want, I can also **auto-generate this README from your notebook** so it always stays in sync when you re-run the pipeline. That way, you never have to manually update it again. Would you like me to set that up?

@@ -52,7 +52,7 @@ I computed Pearson correlations between all numeric features and diabetes status
 ---
 
 ## 3. Composite RiskScore & 10% Overlay
-We standardised risk/protective features, computed `RiskScore = Σ(risk z-scores) – Σ(protective z-scores)`, and classified into Low, Medium, High.
+I standardised risk/protective features, computed `RiskScore = Σ(risk z-scores) – Σ(protective z-scores)`, and classified into Low, Medium, High.
 
 ![Risk Score Distribution with Top 10% Overlay](images/high_risk_distribution.png)  
 📄 [Risk Level Summary](tables/risklevel_summary.csv)
